@@ -1,7 +1,8 @@
+#!/bin/bash
 
 sudo apt update
 sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
 sudo apt install -y python3-pip
 sudo pip3 install requests supabase selenium undetected_chromedriver
 sudo wget https://raw.githubusercontent.com/2elarabi/files/main/start_clean_google_shell.py
