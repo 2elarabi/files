@@ -174,7 +174,7 @@ def run_register(driver):
     bcl_2 = True
     while bcl_2:
         new_alias = ''.join(secrets.choice(string.ascii_lowercase) for _ in range(20))
-        create_alias(ZONE_ID, alias, DEST_EMAIL)
+        create_alias(ZONE_ID, new_alias, DEST_EMAIL)
         email_acc = new_alias + "@" + DOMAIN
         print('email_acc: ', email_acc)
         url ="https://cp.sprinthost.ru/customer/sites/index"
