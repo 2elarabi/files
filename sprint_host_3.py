@@ -121,7 +121,7 @@ def get_code(rec):
     inc = 0
     while tthus:
         code = None
-        if inc < 10:
+        if inc < 120:
             inc = inc + 1
             IMAP_SERVER = "imap.gmail.com"
             """
