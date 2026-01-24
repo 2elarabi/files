@@ -194,7 +194,7 @@ def run_register(driver):
             try:
                 button = driver.find_element(
                     By.CSS_SELECTOR,
-                    "ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full"
+                    ".ui5-button-main.ui5-button-main--grey.ui5-button-main--L.ui5-button-main--dark.ui5-button-main--full"
                 )
                 button.click()
                 thus = False
