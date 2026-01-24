@@ -434,8 +434,21 @@ def run_register(driver):
                 inp = inps[0]
                 actions.move_to_element(inp).click(inp).perform()
                 if code_ == None:
-                    code_ = get_code(email_acc)
-                    print('code_: ', code_)
+                    c_code = True
+                    while c_code:
+                        code_ = get_code(email_acc)
+                        if code_ == None:
+                            thusq = True
+                            while thusq:
+                                resnds = driver.execute_script("return document.querySelectorAll('input[class=\"ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--ghost ui5-button-main--full\"]')")
+                                if len(resnds) > 0:
+                                    thusq = False
+                                    resnds[0].click()
+                                time.sleep(1)
+                        else:
+                            c_code = False
+                            
+                        print('code_: ', code_)
                 th_check = True
                 while th_check:
                     for lt in code_:
