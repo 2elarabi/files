@@ -467,7 +467,7 @@ def run_register(driver):
                               element.dispatchEvent(event);
                             }}
                             
-                            setInterval(()=>{{setNativeValue(document.querySelector('[class="ui5-input-code__input empty"]'), "{lt}")}}, 300)"""
+                            setNativeValue(document.querySelector('[class="ui5-input-code__input empty"]'), "{lt}")"""
                         driver.execute_script(scs)
                     time.sleep(3)
                     inpsss = driver.execute_script("return document.querySelectorAll('input[class=\"ui5-input-code__input empty\"]')")
