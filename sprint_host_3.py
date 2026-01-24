@@ -129,7 +129,7 @@ def get_code(rec):
             EMAIL_PASSWORD = "emxebzcliuznfbjo"  # 16-char app password
             """
             EMAIL_ACCOUNT = "adamhardison284@gmail.com"
-            EMAIL_PASSWORD = "gpumxjlmatlbstjg"
+            EMAIL_PASSWORD = "idspsdpmgungtrtb"
             
             # === CONNECT ===
             imap = imaplib.IMAP4_SSL(IMAP_SERVER)
