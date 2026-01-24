@@ -121,7 +121,7 @@ def get_code(rec):
     inc = 0
     while tthus:
         code = None
-        if inc < 120:
+        if inc < 60:
             inc = inc + 1
             IMAP_SERVER = "imap.gmail.com"
             """
@@ -129,7 +129,7 @@ def get_code(rec):
             EMAIL_PASSWORD = "emxebzcliuznfbjo"  # 16-char app password
             """
             EMAIL_ACCOUNT = "adamhardison284@gmail.com"
-            EMAIL_PASSWORD = "idspsdpmgungtrtb"
+            EMAIL_PASSWORD = "gpumxjlmatlbstjg"
             
             # === CONNECT ===
             imap = imaplib.IMAP4_SSL(IMAP_SERVER)
@@ -519,6 +519,8 @@ def run_register(driver):
         dataa = {"username": username, "host": smtp_host, "imap": imap_host}
 
         response = supabase.table("sprint_host_smtps").insert(dataa).execute()
+        alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+        delete_alias(ZONE_ID, alias_id)
         """
         driver.close()
         driver.quit()
