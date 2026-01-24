@@ -440,7 +440,7 @@ def run_register(driver):
                         if code_ == None:
                             thusq = True
                             while thusq:
-                                resnds = driver.execute_script("return document.querySelectorAll('input[class=\"ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--ghost ui5-button-main--full\"]')")
+                                resnds = driver.execute_script("return document.querySelectorAll('button[class=\"ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--ghost ui5-button-main--full\"]')")
                                 if len(resnds) > 0:
                                     thusq = False
                                     resnds[0].click()
