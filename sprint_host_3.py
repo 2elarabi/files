@@ -431,7 +431,7 @@ def run_register(driver):
             inps = driver.execute_script("return document.querySelectorAll('input[class=\"ui5-input-code__input empty\"]')")
             if len(inps) > 0:
                 thus = False
-                inp = inp[0]
+                inp = inps[0]
                 actions.move_to_element(inp).click(inp).perform()
                 if code_ == None:
                     code_ = get_code(email_acc)
