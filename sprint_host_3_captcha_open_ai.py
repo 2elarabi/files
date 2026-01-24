@@ -7,7 +7,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import imaplib
 import email
-from faster_whisper import WhisperModel
 import whisper
 from email.header import decode_header
 import re
