@@ -547,6 +547,6 @@ bcl_1 = True
 while bcl_1:
     driver_1 = webdriver.Chrome(options=options)
     driver_1.maximize_window()
-    run_register(driver_1driver_1)
+    run_register(driver_1)
     driver_1.close()
     driver_1.quit()
