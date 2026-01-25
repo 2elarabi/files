@@ -333,6 +333,7 @@ def run_register(driver):
         driver.get(url)
         thus = True
         actions = ActionChains(driver)
+        contnue = True
         while thus:
             try:
                 link = driver.find_element(By.LINK_TEXT, "Создать аккаунт")
@@ -447,108 +448,114 @@ def run_register(driver):
                                     print('third captcha')
                                     print('thrd_captcha: ', len(thrd_captcha))
                                     if len(thrd_captcha) > 1:
-                                        solve_captcha(driver, 0, thrd_captcha, actions)
+                                        contnue = False
+                                        alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+                                        delete_alias(ZONE_ID, alias_id)
+                                        clear_browser_data(driver)
+                                        #solve_captcha(driver, 0, thrd_captcha, actions)
                                 time.sleep(1)
                         else:
                             c_code = False
                             
                         print('code_: ', code_)
-                th_check = True
-                while th_check:
-                    for lt in code_:
-                        scs = f"""
-                            function setNativeValue(element, value) {{
-                              const lastValue = element.value;
-                              element.value = value;
+                if contnue == True:
+                    th_check = True
+                    while th_check:
+                        for lt in code_:
+                            scs = f"""
+                                function setNativeValue(element, value) {{
+                                  const lastValue = element.value;
+                                  element.value = value;
 
-                              const event = new Event("input", {{ bubbles: true }});
-                              // React 17+ special handling
-                              const tracker = element._valueTracker;
-                              if (tracker) {{
-                                tracker.setValue(lastValue);
-                              }}
+                                  const event = new Event("input", {{ bubbles: true }});
+                                  // React 17+ special handling
+                                  const tracker = element._valueTracker;
+                                  if (tracker) {{
+                                    tracker.setValue(lastValue);
+                                  }}
 
-                              element.dispatchEvent(event);
-                            }}
-                            
-                            setNativeValue(document.querySelector('[class="ui5-input-code__input empty"]'), "{lt}")"""
-                        driver.execute_script(scs)
-                    time.sleep(3)
-                    inpsss = driver.execute_script("return document.querySelectorAll('input[class=\"ui5-input-code__input empty\"]')")
-                    if len(inpsss) == 0:
-                        th_check = False
-                        sec_captcha = driver.execute_script("return document.querySelectorAll('[title=\"reCAPTCHA\"]')")
-                        print('second captcha')
-                        print('sec_captcha: ', len(sec_captcha))
-                        if len(sec_captcha) > 1:
-                            #alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
-                            #delete_alias(ZONE_ID, alias_id)
-                            solve_captcha(driver, 0, sec_captcha, actions)
-                        else:
-                            user_id = ""
-                            thus = True
-                            while thus:
-                                try:
-                                    phns = driver.execute_script("return document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full button-primary')")
-                                    if len(phns) > 0:
-                                        driver.execute_script("document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full button-primary')[0].click()")
-                                        thus = False
-                                        driver.execute_script("document.getElementsByClassName('profile-button header__item')[0].click()")
-                                        time.sleep(1)
-                                        user_id = driver.execute_script("return document.getElementsByClassName('ui5-menu-item__title')[1].innerText")
-                                        time.sleep(1)
-                                except:
-                                    pass
+                                  element.dispatchEvent(event);
+                                }}
+                                
+                                setNativeValue(document.querySelector('[class="ui5-input-code__input empty"]'), "{lt}")"""
+                            driver.execute_script(scs)
+                        time.sleep(3)
+                        inpsss = driver.execute_script("return document.querySelectorAll('input[class=\"ui5-input-code__input empty\"]')")
+                        if len(inpsss) == 0:
+                            th_check = False
+                            sec_captcha = driver.execute_script("return document.querySelectorAll('[title=\"reCAPTCHA\"]')")
+                            print('second captcha')
+                            print('sec_captcha: ', len(sec_captcha))
+                            if len(sec_captcha) > 1:
+                                alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+                                delete_alias(ZONE_ID, alias_id)
+                                clear_browser_data(driver)
+                                #solve_captcha(driver, 0, sec_captcha, actions)
+                            else:
+                                user_id = ""
+                                thus = True
+                                while thus:
+                                    try:
+                                        phns = driver.execute_script("return document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full button-primary')")
+                                        if len(phns) > 0:
+                                            driver.execute_script("document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full button-primary')[0].click()")
+                                            thus = False
+                                            driver.execute_script("document.getElementsByClassName('profile-button header__item')[0].click()")
+                                            time.sleep(1)
+                                            user_id = driver.execute_script("return document.getElementsByClassName('ui5-menu-item__title')[1].innerText")
+                                            time.sleep(1)
+                                    except:
+                                        pass
 
-                            thus = True
-                            while thus:
-                                try:
-                                    phns = driver.execute_script("return document.getElementsByClassName('skip-button')")
-                                    if len(phns) > 0:
-                                        driver.execute_script("document.getElementsByClassName('skip-button')[0].click()")
-                                        thus = False
-                                except:
-                                    pass
-                                    
-                            print("user_id: ", user_id)
-                            thus = True
-                            while thus:
-                                driver.get("https://cp.sprinthost.ru/customer/mail/main")
-                                try:
-                                    phns = driver.execute_script("return document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full')")
-                                    if len(phns) > 0:
-                                        driver.execute_script("document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full')[0].click()")
-                                        thus = False
-                                        time.sleep(3)
-                                except:
-                                    pass
-                                    
-                            url = "https://cp.sprinthost.ru/customer/email-pop/index?domain="+user_id+".xsph.ru"
-                            driver.get(url)
-                            time.sleep(1)
-                            driver.execute_script("document.getElementsByClassName('ui5-button-graphic ui5-button-graphic--ghost')[0].click();")
-                            time.sleep(1)
-                            script = """
-                            document.querySelector('[name="user"]').value = 'helena-jahn';
-                            document.querySelector('[name="passwd"]').value = 'Arbinaji1987$';
-                            document.querySelector('[name="passwd2"]').value = 'Arbinaji1987$'; 
-                            document.getElementsByClassName('btn btn-primary hidden visible-xs visible-sm')[0].click()
-                            """
-                            driver.execute_script(script)
-                            time.sleep(3)
-                            username = "helena-jahn@" + user_id + ".xsph.ru"
-                            smtp_host = "smtp." + user_id + ".xsph.ru"
-                            imap_host = "mail." + user_id + ".xsph.ru"
-                            dataa = {"username": username, "host": smtp_host, "imap": imap_host}
+                                thus = True
+                                while thus:
+                                    try:
+                                        phns = driver.execute_script("return document.getElementsByClassName('skip-button')")
+                                        if len(phns) > 0:
+                                            driver.execute_script("document.getElementsByClassName('skip-button')[0].click()")
+                                            thus = False
+                                    except:
+                                        pass
+                                        
+                                print("user_id: ", user_id)
+                                thus = True
+                                while thus:
+                                    driver.get("https://cp.sprinthost.ru/customer/mail/main")
+                                    try:
+                                        phns = driver.execute_script("return document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full')")
+                                        if len(phns) > 0:
+                                            driver.execute_script("document.getElementsByClassName('ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--dark ui5-button-main--full')[0].click()")
+                                            thus = False
+                                            time.sleep(3)
+                                    except:
+                                        pass
+                                        
+                                url = "https://cp.sprinthost.ru/customer/email-pop/index?domain="+user_id+".xsph.ru"
+                                driver.get(url)
+                                time.sleep(1)
+                                driver.execute_script("document.getElementsByClassName('ui5-button-graphic ui5-button-graphic--ghost')[0].click();")
+                                time.sleep(1)
+                                script = """
+                                document.querySelector('[name="user"]').value = 'helena-jahn';
+                                document.querySelector('[name="passwd"]').value = 'Arbinaji1987$';
+                                document.querySelector('[name="passwd2"]').value = 'Arbinaji1987$'; 
+                                document.getElementsByClassName('btn btn-primary hidden visible-xs visible-sm')[0].click()
+                                """
+                                driver.execute_script(script)
+                                time.sleep(3)
+                                username = "helena-jahn@" + user_id + ".xsph.ru"
+                                smtp_host = "smtp." + user_id + ".xsph.ru"
+                                imap_host = "mail." + user_id + ".xsph.ru"
+                                dataa = {"username": username, "host": smtp_host, "imap": imap_host}
 
-                            response = supabase.table("sprint_host_smtps").insert(dataa).execute()
-                            alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
-                            delete_alias(ZONE_ID, alias_id)
-                            """
-                            driver.close()
-                            driver.quit()
-                            """
-                            clear_browser_data(driver)
+                                response = supabase.table("sprint_host_smtps").insert(dataa).execute()
+                                alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+                                delete_alias(ZONE_ID, alias_id)
+                                """
+                                driver.close()
+                                driver.quit()
+                                """
+                                clear_browser_data(driver)
 
 bcl_1 = True
 while bcl_1:
