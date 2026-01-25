@@ -161,7 +161,7 @@ def get_code(rec):
                    
     return code
         
-def solve_captcha(driver_, index_, captcha_):
+def solve_captcha(driver_, index_, captcha_, actions_):
     driver_.switch_to.frame(captcha_[index_])
     thuss = True
     while thuss:
@@ -170,7 +170,7 @@ def solve_captcha(driver_, index_, captcha_):
             thuss = False
         except:
             pass
-    actions.move_to_element(anch).click(anch).perform()
+    actions_.move_to_element(anch).click(anch).perform()
     time.sleep(3)
     thus_2 = True
     incc = 0
@@ -189,7 +189,7 @@ def solve_captcha(driver_, index_, captcha_):
                             btnns = driver_.find_elements(By.TAG_NAME, "button")
                             for bt in btnns:
                                 if bt.get_attribute("class") == "cl-v3-btn-base cl-v3-btn-base--main cl-v3-btn-base--lg":
-                                    actions.move_to_element(bt).click(bt).perform()
+                                    actions_.move_to_element(bt).click(bt).perform()
                                     break
                             time.sleep(1)
                             inc = inc + 1
@@ -391,7 +391,7 @@ def run_register(driver):
             print('captcha: ', len(captcha))
             if len(captcha) > 1:
                 thus = False
-                solve_captcha(driver, 0, captcha)
+                solve_captcha(driver, 0, captcha, actions)
                                 
             else:
                 try:
@@ -475,7 +475,7 @@ def run_register(driver):
                         print('second captcha')
                         print('sec_captcha: ', len(sec_captcha))
                         if len(sec_captcha) > 1:
-                            solve_captcha(driver, 0, sec_captcha)
+                            solve_captcha(driver, 0, sec_captcha, actions)
             
             
         user_id = ""
