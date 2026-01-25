@@ -38,7 +38,7 @@ sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.
 sudo apt install ./google-chrome-stable_current_amd64.deb -y
 sudo apt install -y python3-pip
 sudo pip3 install requests supabase selenium undetected_chromedriver faster-whisper
-python sprint_host_3_captcha_open_ai_two_captcha.py
+python sprint_host_3_captcha_open_ai.py
 """
 options = ChromeOptions()
 
@@ -161,8 +161,8 @@ def get_code(rec):
                    
     return code
         
-def solve_captcha(driver_, index_):
-    driver_.switch_to.frame(captcha[index_])
+def solve_captcha(driver_, index_, captcha_):
+    driver_.switch_to.frame(captcha_[index_])
     thuss = True
     while thuss:
         try:
@@ -391,7 +391,7 @@ def run_register(driver):
             print('captcha: ', len(captcha))
             if len(captcha) > 1:
                 thus = False
-                solve_captcha(driver, 0)
+                solve_captcha(driver, 0, captcha)
                                 
             else:
                 try:
@@ -475,7 +475,7 @@ def run_register(driver):
                         print('second captcha')
                         print('sec_captcha: ', len(sec_captcha))
                         if len(sec_captcha) > 1:
-                            solve_captcha(driver, 0)
+                            solve_captcha(driver, 0, sec_captcha)
             
             
         user_id = ""
