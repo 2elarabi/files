@@ -452,6 +452,7 @@ def run_register(driver):
                                         alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
                                         delete_alias(ZONE_ID, alias_id)
                                         clear_browser_data(driver)
+                                        c_code = False
                                         #solve_captcha(driver, 0, thrd_captcha, actions)
                                 time.sleep(1)
                         else:
