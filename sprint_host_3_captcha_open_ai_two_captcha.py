@@ -481,8 +481,8 @@ def run_register(driver):
                         print('second captcha')
                         print('sec_captcha: ', len(sec_captcha))
                         if len(sec_captcha) > 1:
-                            alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
-                            delete_alias(ZONE_ID, alias_id)
+                            #alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+                            #delete_alias(ZONE_ID, alias_id)
                             solve_captcha(driver, 0, sec_captcha, actions)
                         else:
                             user_id = ""
