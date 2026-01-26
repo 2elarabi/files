@@ -437,24 +437,31 @@ def run_register(driver):
                     while c_code:
                         code_ = get_code(email_acc)
                         if code_ == None:
-                            thusq = True
-                            while thusq:
-                                resnds = driver.execute_script("return document.querySelectorAll('button[class=\"ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--ghost ui5-button-main--full\"]')")
-                                if len(resnds) > 0:
-                                    thusq = False
-                                    resnds[0].click()
-                                    time.sleep(3)
-                                    thrd_captcha = driver.execute_script("return document.querySelectorAll('[title=\"reCAPTCHA\"]')")
-                                    print('third captcha')
-                                    print('thrd_captcha: ', len(thrd_captcha))
-                                    if len(thrd_captcha) > 1:
-                                        contnue = False
-                                        alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
-                                        delete_alias(ZONE_ID, alias_id)
-                                        clear_browser_data(driver)
-                                        c_code = False
-                                        #solve_captcha(driver, 0, thrd_captcha, actions)
-                                time.sleep(1)
+                            if 2 == 1:
+                                thusq = True
+                                while thusq:
+                                    resnds = driver.execute_script("return document.querySelectorAll('button[class=\"ui5-button-main ui5-button-main--grey ui5-button-main--L ui5-button-main--ghost ui5-button-main--full\"]')")
+                                    if len(resnds) > 0:
+                                        thusq = False
+                                        resnds[0].click()
+                                        time.sleep(3)
+                                        thrd_captcha = driver.execute_script("return document.querySelectorAll('[title=\"reCAPTCHA\"]')")
+                                        print('third captcha')
+                                        print('thrd_captcha: ', len(thrd_captcha))
+                                        if len(thrd_captcha) > 1:
+                                            contnue = False
+                                            alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+                                            delete_alias(ZONE_ID, alias_id)
+                                            clear_browser_data(driver)
+                                            c_code = False
+                                            #solve_captcha(driver, 0, thrd_captcha, actions)
+                                    time.sleep(1)
+                            else:
+                                contnue = False
+                                alias_id = get_alias_id_by_email(ZONE_ID, email_acc)
+                                delete_alias(ZONE_ID, alias_id)
+                                clear_browser_data(driver)
+                                c_code = False
                         else:
                             c_code = False
                             
