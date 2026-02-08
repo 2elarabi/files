@@ -22,8 +22,8 @@ with open(CONFIG_FILE, "r") as f:
 
 SUPABASE_URL = config["SUPABASE_URL"]
 SUPABASE_KEY = config["SUPABASE_KEY"]
-PROJECT_ID = config["PROJECT_ID"]
-API_KEY = config["API_KEY"]
+PROJECT_ID = config["PD"]
+API_KEY = config["A_K"]
 SERVICE_ACCOUNT_FILE = config["SERVICE_ACCOUNT_FILE"]
 
 EMAILS_PER_BATCH = config.get("EMAILS_PER_BATCH", 1000)
