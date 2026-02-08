@@ -15,9 +15,9 @@ from google.auth.transport.requests import AuthorizedSession, Request
 # =========================
 # LOAD CONFIG FROM JSON
 # =========================
-CONFIG_FILE = "config.json"
+NODGA3 = "lawah.json"
 
-with open(CONFIG_FILE, "r") as f:
+with open(NODGA3, "r") as f:
     config = json.load(f)
 
 SUPABASE_URL = config["SUPABASE_URL"]
