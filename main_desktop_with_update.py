@@ -15,7 +15,7 @@ from google.auth.transport.requests import AuthorizedSession, Request
 # =========================
 # LOAD CONFIG FROM JSON
 # =========================
-CONFIG_FILE = "config.json"
+CONFIG_FILE = "2.json"
 
 with open(CONFIG_FILE, "r") as f:
     config = json.load(f)
