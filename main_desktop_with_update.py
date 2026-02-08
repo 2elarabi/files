@@ -24,7 +24,7 @@ SUPABASE_URL = config["SUPABASE_URL"]
 SUPABASE_KEY = config["SUPABASE_KEY"]
 PROJECT_ID = config["PD"]
 API_KEY = config["A_K"]
-SERVICE_ACCOUNT_FILE = config["SERVICE_ACCOUNT_FILE"]
+S_A_F = config["SERVICE_ACCOUNT_FILE"]
 
 EMAILS_PER_BATCH = config.get("EMAILS_PER_BATCH", 1000)
 MAX_TENANT_WORKERS = config.get("MAX_TENANT_WORKERS", 5)
@@ -36,12 +36,12 @@ queue = Queue()
 # =========================
 # FIREBASE + GOOGLE AUTH
 # =========================
-cred = credentials.Certificate(SERVICE_ACCOUNT_FILE)
+cred = credentials.Certificate(S_A_F)
 firebase_admin.initialize_app(cred)
 
 SCOPES = ["https://www.googleapis.com/auth/identitytoolkit"]
 sa_creds = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES
+    S_A_F, scopes=SCOPES
 )
 authed_session = AuthorizedSession(sa_creds)
 
