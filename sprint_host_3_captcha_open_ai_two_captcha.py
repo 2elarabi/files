@@ -42,7 +42,7 @@ python sprint_host_3_captcha_open_ai.py
 """
 options = ChromeOptions()
 
-proxy = "31.56.127.193:7684:khjiupdw:cvn4jdjbprnv"
+proxy = "khjiupdw:cvn4jdjbprnv@31.56.127.193:7684"
 options.add_argument(f"--proxy-server=http://{proxy}")
 
 def get_alias_id_by_email(zone_id, email):
