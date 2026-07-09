@@ -289,7 +289,7 @@ async function func() {
   const data = await res.json();
 
   emails = data.emails
-  emails.push('youssef.chippo@outlook.com');
+  //emails.push('youssef.chippo@outlook.com');
   let subject_ = subjects[inc % subjects.length]
   let img_ = image_links[inc % image_links.length]
   let img_2 = image_links_2[inc % image_links_2.length]
